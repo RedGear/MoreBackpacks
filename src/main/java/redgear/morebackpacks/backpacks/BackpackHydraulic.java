@@ -1,0 +1,54 @@
+package redgear.morebackpacks.backpacks;
+
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidContainerRegistry.FluidContainerData;
+import redgear.core.compat.Mods;
+import redgear.morebackpacks.core.BasicBackpack;
+
+public class BackpackHydraulic extends BasicBackpack
+{
+    public void fill()
+    {
+    	FluidContainerData[] data = FluidContainerRegistry.getRegisteredFluidContainerData();
+
+        for (FluidContainerData each : data)
+        {
+            addValidItem(each.emptyContainer); // These will try to put the same ones multiple times, but that's ok
+            addValidItem(each.filledContainer);
+        }
+        
+        if (Mods.BuildcraftCore.isIn())
+        {
+            String materials[] = {"Wood", "Emerald", "Stone", "Cobblestone", "Iron", "Gold", "Void", "Sandstone"};
+
+            for (String i : materials){
+                addItem("item.PipeFluids" + i);
+            }
+
+            
+        }
+    }
+
+    public String getKey()
+    {
+        return "hydraulic";
+    }
+
+    public String getName()
+    {
+        return "Hydraulic Engineer's Backpack";
+    }
+
+    public int getPrimaryColour()
+    {
+        return 255;
+    }
+
+    @Override
+    public ItemStack getCraftingItem()
+    {
+        return new ItemStack(Item.bucketEmpty);
+    }
+}
