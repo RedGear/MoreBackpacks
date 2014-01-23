@@ -7,48 +7,37 @@ import net.minecraftforge.fluids.FluidContainerRegistry.FluidContainerData;
 import redgear.core.compat.Mods;
 import redgear.morebackpacks.core.BasicBackpack;
 
-public class BackpackHydraulic extends BasicBackpack
-{
-    public void fill()
-    {
-    	FluidContainerData[] data = FluidContainerRegistry.getRegisteredFluidContainerData();
+public class BackpackHydraulic extends BasicBackpack {
 
-        for (FluidContainerData each : data)
-        {
-            addValidItem(each.emptyContainer); // These will try to put the same ones multiple times, but that's ok
-            addValidItem(each.filledContainer);
-        }
-        
-        if (Mods.BuildcraftCore.isIn())
-        {
-            String materials[] = {"Wood", "Emerald", "Stone", "Cobblestone", "Iron", "Gold", "Void", "Sandstone"};
+	public BackpackHydraulic() {
+		super("Hydraulic");
+	}
 
-            for (String i : materials){
-                addItem("item.PipeFluids" + i);
-            }
+	@Override
+	public void fill() {
+		FluidContainerData[] data = FluidContainerRegistry.getRegisteredFluidContainerData();
 
-            
-        }
-    }
+		for (FluidContainerData each : data) {
+			addValidItem(each.emptyContainer); // These will try to put the same ones multiple times, but that's ok
+			addValidItem(each.filledContainer);
+		}
 
-    public String getKey()
-    {
-        return "hydraulic";
-    }
+		if (Mods.BuildcraftCore.isIn()) {
+			String materials[] = {"Wood", "Emerald", "Stone", "Cobblestone", "Iron", "Gold", "Void", "Sandstone" };
 
-    public String getName()
-    {
-        return "Hydraulic Engineer's Backpack";
-    }
+			for (String i : materials)
+				addItem("item.PipeFluids" + i);
 
-    public int getPrimaryColour()
-    {
-        return 255;
-    }
+		}
+	}
 
-    @Override
-    public ItemStack getCraftingItem()
-    {
-        return new ItemStack(Item.bucketEmpty);
-    }
+	@Override
+	public int getPrimaryColour() {
+		return 255;
+	}
+
+	@Override
+	public ItemStack getCraftingItem() {
+		return new ItemStack(Item.bucketEmpty);
+	}
 }

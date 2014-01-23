@@ -6,74 +6,56 @@ import redgear.core.compat.ModConfigHelper;
 import redgear.core.compat.Mods;
 import redgear.morebackpacks.core.BasicBackpack;
 
-public class BackpackElectrician extends BasicBackpack
-{
-    public void fill()
-    {
-        addItem("tile.for.engine"); //forestry engines
+public class BackpackElectrician extends BasicBackpack {
+	public BackpackElectrician() {
+		super("Electric");
+	}
 
-        if (Mods.IC2.isIn())
-        {
-            addItem("itemCable");
-            addItem("blockElectric");
-            addItem("itemBatSU");
-            addItem("itemBatREDischarged");
-            addItem("itemBatLamaCrystal");
-            addItem("itemBatCrystal");
-            addItem("itemBatRE");
-            addItem("itemToolMEter");
-            addItem("blockGenerator");
-        }
+	@Override
+	public void fill() {
+		addItem("tile.for.engine"); //forestry engines
 
-        if (Mods.BuildcraftCore.isIn())
-        {
-            addItem("tile.engineBlock");
-            
-            if (Mods.BuildcraftCore.isIn())
-            {
-                String materials[] = {"Wood", "Stone", "Cobblestone","Gold", "Diamond", "Quartz"};
+		if (Mods.IC2.isIn()) {
+			addItem("itemCable");
+			addItem("blockElectric");
+			addItem("itemBatSU");
+			addItem("itemBatREDischarged");
+			addItem("itemBatLamaCrystal");
+			addItem("itemBatCrystal");
+			addItem("itemBatRE");
+			addItem("itemToolMEter");
+			addItem("blockGenerator");
+		}
 
-                for (String i : materials){
-                    addItem("item.PipePower" + i);
-                }
+		if (Mods.BuildcraftCore.isIn()) {
+			addItem("tile.engineBlock");
 
-                
-            }
-        }
+			if (Mods.BuildcraftCore.isIn()) {
+				String materials[] = {"Wood", "Stone", "Cobblestone", "Gold", "Diamond", "Quartz" };
 
-        if (Mods.Railcraft.isIn())
-        {
-            addItemsFromMeta("tile.railcraft.machine.beta", 7, 9); //Steam engines
-        }
-    }
+				for (String i : materials)
+					addItem("item.PipePower" + i);
 
-    public String getKey()
-    {
-        return "electric";
-    }
+			}
+		}
 
-    public String getName()
-    {
-        return "Electrician's Backpack";
-    }
-    public int getPrimaryColour()
-    {
-        return 14474460;
-    }
+		if (Mods.Railcraft.isIn())
+			addItemsFromMeta("tile.railcraft.machine.beta", 7, 9); //Steam engines
+	}
 
-    @Override
-    public ItemStack getCraftingItem()
-    {
-        if (Mods.IC2.isIn())
-        {
-            return ModConfigHelper.get("itemCable", 0);
-        }
+	@Override
+	public int getPrimaryColour() {
+		return 14474460;
+	}
 
-        if (Mods.BuildcraftCore.isIn())
-        {
-            return ModConfigHelper.get("item.PipePowerGold");
-        }
+	@Override
+	public ItemStack getCraftingItem() {
+		if (Mods.IC2.isIn())
+			return ModConfigHelper.get("itemCable", 0);
 
-        return new ItemStack(Item.redstone);
-    }
+		if (Mods.BuildcraftCore.isIn())
+			return ModConfigHelper.get("item.PipePowerGold");
+
+		return new ItemStack(Item.redstone);
+	}
 }

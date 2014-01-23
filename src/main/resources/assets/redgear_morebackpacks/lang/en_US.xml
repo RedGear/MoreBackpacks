@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties version="1.0">
+	<comment>English Localization File for More Backpacks</comment>
+        
+	<entry key="item.RedGear.MoreBackpacks.Backpack.Artist.name">Artist's Backpack</entry>
+	<entry key="item.RedGear.MoreBackpacks.Backpack.Electric.name">Electrician's Backpack</entry>
+	<entry key="item.RedGear.MoreBackpacks.Backpack.Farmer.name">Farmer's Backpack</entry>
+	<entry key="item.RedGear.MoreBackpacks.Backpack.Hydraulic.name">Hydraulic Engineer's Backpack</entry>
+	<entry key="item.RedGear.MoreBackpacks.Backpack.Jewler.name">Jewler's Backpack</entry>
+	<entry key="item.RedGear.MoreBackpacks.Backpack.Logistic.name">Logistical Engineer's Backpack</entry>
+	<entry key="item.RedGear.MoreBackpacks.Backpack.Magician.name">Magician's Backpack</entry>
+	<entry key="item.RedGear.MoreBackpacks.Backpack.Metallurgist.name">Metallurgist's Backpack</entry>
+	<entry key="item.RedGear.MoreBackpacks.Backpack.Ic2nuclear.name">Nuclear Engineer's Backpack</entry>
+	<entry key="item.RedGear.MoreBackpacks.Backpack.Programmer.name">Programmer's Backpack</entry>
+	<entry key="item.RedGear.MoreBackpacks.Backpack.Redstone.name">Redstone Engineer's Backpack</entry>
+	<entry key="item.RedGear.MoreBackpacks.Backpack.Survival.name">Survialist's Backpack</entry>
+	
+</properties>
