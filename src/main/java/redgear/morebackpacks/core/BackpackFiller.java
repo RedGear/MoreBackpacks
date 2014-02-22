@@ -7,14 +7,14 @@ import java.util.Stack;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
-import redgear.core.compat.ModConfigHelper;
-import redgear.core.compat.Mods;
 import redgear.core.mod.FileHelper;
+import redgear.core.mod.Mods;
 import redgear.core.util.StringHelper;
 import cpw.mods.fml.common.Loader;
 import forestry.api.storage.BackpackManager;
 import forestry.api.storage.IBackpackDefinition;
 
+//TODO: Backpack filler needs a full rewrite thanks to new GameRegistry. 
 public class BackpackFiller {
 	private final File scriptDir;
 
@@ -169,7 +169,7 @@ public class BackpackFiller {
 						}
 					}
 				} else
-					MoreBackpacks.inst.myLogger.warning("Invalid file in script folder: " + file.getName());
+					MoreBackpacks.inst.myLogger.warn("Invalid file in script folder: " + file.getName());
 
 				//reset everything between files
 				packName = "";
@@ -178,7 +178,7 @@ public class BackpackFiller {
 				end = -1;
 				buffer = "";
 			} catch (Exception e) {
-				MoreBackpacks.inst.myLogger.warning("Error reading script file: " + file.getName());
+				MoreBackpacks.inst.myLogger.warn("Error reading script file: " + file.getName());
 				MoreBackpacks.inst.logDebug("", e);
 			}
 		}
@@ -234,25 +234,25 @@ public class BackpackFiller {
 	}
 
 	public void addItem(String backpackKey, String itemName) {
-		addItem(backpackKey, ModConfigHelper.get(itemName));
+		//addItem(backpackKey, ModConfigHelper.get(itemName));
 	}
 
 	public void addItem(String backpackKey, String itemName, int meta) {
-		addItem(backpackKey, ModConfigHelper.get(itemName, meta));
+		//addItem(backpackKey, ModConfigHelper.get(itemName, meta));
 	}
 
 	public void addItem(String backpackKey, String itemName, int startMeta, int endMeta) {
-		ItemStack test = ModConfigHelper.get(itemName);
+		/*ItemStack test = ModConfigHelper.get(itemName);
 
 		if (test == null)
 			return;
 
-		addItem(backpackKey, test.itemID, startMeta, endMeta);
+		addItem(backpackKey, test.itemID, startMeta, endMeta);*/
 	}
 
 	public void addItem(String backpackKey, int itemID, int startMeta, int endMeta) {
-		for (int i = startMeta; i <= endMeta; i++)
-			addItem(backpackKey, new ItemStack(itemID, 1, i));
+		/*for (int i = startMeta; i <= endMeta; i++)
+			addItem(backpackKey, new ItemStack(itemID, 1, i));*/
 	}
 
 	private void addItem(String backpackKey, ItemStack[] array) {

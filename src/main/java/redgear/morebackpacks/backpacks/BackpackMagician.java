@@ -1,8 +1,8 @@
 package redgear.morebackpacks.backpacks;
 
-import net.minecraft.item.Item;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import redgear.core.compat.Mods;
+import redgear.core.mod.Mods;
 import redgear.morebackpacks.core.BasicBackpack;
 
 public class BackpackMagician extends BasicBackpack {
@@ -13,11 +13,11 @@ public class BackpackMagician extends BasicBackpack {
 
 	@Override
 	public void fill() {
-		addItem(Item.enchantedBook);
-		addItem(Item.expBottle);
+		addItem(Items.enchanted_book);
+		addItem(Items.experience_bottle);
 
 		if (Mods.Thaum.isIn()) {
-			addItem("item.WandCastingApprentice");
+			/*addItem("item.WandCastingApprentice");
 			addItem("item.WandCastingAdept");
 			addItem("item.WandCastingMage");
 			addItem("item.WandFire");
@@ -54,7 +54,7 @@ public class BackpackMagician extends BasicBackpack {
 			addItem("item.BlockJarFilledItem");
 			addItem("item.ItemGolemPlacer");
 			addItem("item.ItemGolemCore");
-			addItem("item.ItemGolemDecoration");
+			addItem("item.ItemGolemDecoration");*/
 		}
 	}
 
@@ -70,6 +70,6 @@ public class BackpackMagician extends BasicBackpack {
 
 	@Override
 	public ItemStack getCraftingItem() {
-		return new ItemStack(Item.enchantedBook); //ModConfigHelper.get("item.ItemShard");
+		return new ItemStack(Items.book); //ModConfigHelper.get("item.ItemShard");
 	}
 }

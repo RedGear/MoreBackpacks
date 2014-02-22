@@ -2,13 +2,13 @@ package redgear.morebackpacks.backpacks;
 
 import java.util.ArrayList;
 
-import net.minecraft.item.Item;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.oredict.OreDictionary;
 import redgear.morebackpacks.core.BasicBackpack;
 import redgear.morebackpacks.core.MoreBackpacks;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import forestry.api.storage.BackpackStowEvent;
 
 public class BackpackMetallurgist extends BasicBackpack {
@@ -42,7 +42,7 @@ public class BackpackMetallurgist extends BasicBackpack {
 			}
 	}
 
-	@ForgeSubscribe
+	@SubscribeEvent
 	public void transmute(BackpackStowEvent event) {
 		if (!event.backpackDefinition.getKey().equals(getKey()))
 			return;
@@ -56,8 +56,8 @@ public class BackpackMetallurgist extends BasicBackpack {
 				slot = event.backpackInventory.getStackInSlot(i);
 
 				if (slot != null && OreDictionary.getOreID(slot) == inputOreId) {
-					MoreBackpacks.inst.logDebug("Transmuting metal");
-					event.stackToStow.itemID = slot.itemID;
+					//setItem()
+					event.stackToStow.func_150996_a(slot.getItem());
 					event.stackToStow.setItemDamage(slot.getItemDamage());
 				}
 			}
@@ -70,6 +70,6 @@ public class BackpackMetallurgist extends BasicBackpack {
 
 	@Override
 	public ItemStack getCraftingItem() {
-		return new ItemStack(Item.ingotGold);
+		return new ItemStack(Items.gold_ingot);
 	}
 }

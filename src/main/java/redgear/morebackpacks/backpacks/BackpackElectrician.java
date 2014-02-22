@@ -1,9 +1,8 @@
 package redgear.morebackpacks.backpacks;
 
-import net.minecraft.item.Item;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import redgear.core.compat.ModConfigHelper;
-import redgear.core.compat.Mods;
+import redgear.core.mod.Mods;
 import redgear.morebackpacks.core.BasicBackpack;
 
 public class BackpackElectrician extends BasicBackpack {
@@ -13,10 +12,10 @@ public class BackpackElectrician extends BasicBackpack {
 
 	@Override
 	public void fill() {
-		addItem("tile.for.engine"); //forestry engines
+		//addItem("tile.for.engine"); //forestry engines
 
 		if (Mods.IC2.isIn()) {
-			addItem("itemCable");
+			/*addItem("itemCable");
 			addItem("blockElectric");
 			addItem("itemBatSU");
 			addItem("itemBatREDischarged");
@@ -24,11 +23,11 @@ public class BackpackElectrician extends BasicBackpack {
 			addItem("itemBatCrystal");
 			addItem("itemBatRE");
 			addItem("itemToolMEter");
-			addItem("blockGenerator");
+			addItem("blockGenerator");*/
 		}
 
 		if (Mods.BuildcraftCore.isIn()) {
-			addItem("tile.engineBlock");
+			/*addItem("tile.engineBlock");
 
 			if (Mods.BuildcraftCore.isIn()) {
 				String materials[] = {"Wood", "Stone", "Cobblestone", "Gold", "Diamond", "Quartz" };
@@ -36,11 +35,11 @@ public class BackpackElectrician extends BasicBackpack {
 				for (String i : materials)
 					addItem("item.PipePower" + i);
 
-			}
+			}*/
 		}
 
-		if (Mods.Railcraft.isIn())
-			addItemsFromMeta("tile.railcraft.machine.beta", 7, 9); //Steam engines
+		//if (Mods.Railcraft.isIn())
+		//	addItemsFromMeta("tile.railcraft.machine.beta", 7, 9); //Steam engines
 	}
 
 	@Override
@@ -50,12 +49,12 @@ public class BackpackElectrician extends BasicBackpack {
 
 	@Override
 	public ItemStack getCraftingItem() {
-		if (Mods.IC2.isIn())
+		/*if (Mods.IC2.isIn())
 			return ModConfigHelper.get("itemCable", 0);
 
 		if (Mods.BuildcraftCore.isIn())
 			return ModConfigHelper.get("item.PipePowerGold");
-
-		return new ItemStack(Item.redstone);
+*/
+		return new ItemStack(Items.redstone);
 	}
 }

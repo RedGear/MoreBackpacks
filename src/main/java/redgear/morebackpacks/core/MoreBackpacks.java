@@ -2,8 +2,8 @@ package redgear.morebackpacks.core;
 
 import java.util.ArrayList;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidRegistry;
 import redgear.core.mod.ModUtils;
@@ -27,29 +27,25 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
-import forestry.api.core.ItemInterface;
 import forestry.api.recipes.RecipeManagers;
 import forestry.api.storage.BackpackManager;
 import forestry.api.storage.EnumBackpackType;
 
-@Mod(modid = "RedGear|MoreBackpacks", name = "More Backpacks", version = "@ModVersion@", dependencies = "required-after:RedGear|Core;required-after:Forestry;")
+@Mod(modid = "redgear_morebackpacks", name = "More Backpacks", version = "@ModVersion@", dependencies = "required-after:redgear_core;required-after:Forestry;")
 public class MoreBackpacks extends ModUtils {
 
-	@Instance("RedGear|MoreBackpacks")
+	@Instance("redgear_morebackpacks")
 	public static ModUtils inst;
 
-	private ItemStack wovenSilk;
-	private static BackpackFiller filler;
-
-	public MoreBackpacks() {
-		super(0, 23500);
-	}
+	private SimpleItem wovenSilk;
+	//private static BackpackFiller filler;
 
 	private final ArrayList<BasicBackpack> backpacks = new ArrayList<BasicBackpack>();
 
 	@Override
 	public void PreInit(FMLPreInitializationEvent event) {
-		filler = new BackpackFiller(event.getModConfigurationDirectory());
+		//TODO: Backpack filler needs a full rewrite thanks to new GameRegistry. 
+		//filler = new BackpackFiller(event.getModConfigurationDirectory());
 
 		createBackpack(new BackpackRedstone()); //redstone stuff
 		createBackpack(new BackpackFarmer()); //farmable plants, animals
@@ -72,13 +68,12 @@ public class MoreBackpacks extends ModUtils {
 
 	@Override
 	public void PostInit(FMLPostInitializationEvent event) {
-		wovenSilk = ItemInterface.getItem("craftingMaterial");
-		wovenSilk.setItemDamage(3);
+		wovenSilk = new SimpleItem(GameRegistry.findItem("Forestry", "craftingMaterial"), 3);
 
 		for (BasicBackpack def : backpacks)
 			fillBackpack(def);
 
-		filler.fillBackpacks();
+		//.fillBackpacks();
 	}
 
 	/**
@@ -87,10 +82,8 @@ public class MoreBackpacks extends ModUtils {
 	 * @param def The backpack definition
 	 */
 	private void createBackpack(BasicBackpack def) {
-		int id = getId(def, EnumBackpackType.T1);
-		def.backpackT1 = new SimpleItem(BackpackManager.backpackInterface.addBackpack(id, def, EnumBackpackType.T1));
-		id = getId(def, EnumBackpackType.T2);
-		def.backpackT2 = new SimpleItem(BackpackManager.backpackInterface.addBackpack(id, def, EnumBackpackType.T2));
+		def.backpackT1 = new SimpleItem(BackpackManager.backpackInterface.addBackpack(def, EnumBackpackType.T1));
+		def.backpackT2 = new SimpleItem(BackpackManager.backpackInterface.addBackpack(def, EnumBackpackType.T2));
 
 		GameRegistry.registerItem(def.backpackT1.getItem(), def.getKey() + "T1");
 		GameRegistry.registerItem(def.backpackT2.getItem(), def.getKey() + "T2");
@@ -110,16 +103,12 @@ public class MoreBackpacks extends ModUtils {
 			if (craftingItem == null)
 				logDebug("Can't find special item for " + def.getName() + "!");
 			else {
-				GameRegistry.addRecipe(def.backpackT1.getStack(), new Object[] {"SWS", "XCX", "SWS", 'S', Item.silk,
-						'W', Block.cloth, 'X', craftingItem, 'C', Block.chest });
+				GameRegistry.addRecipe(def.backpackT1.getStack(), new Object[] {"SWS", "XCX", "SWS", 'S', Items.string,
+						'W', Blocks.wool, 'X', craftingItem, 'C', Blocks.chest });
 				RecipeManagers.carpenterManager.addRecipe(200, FluidRegistry.getFluidStack("water", 1000), null,
-						def.backpackT2.getStack(), new Object[] {"WXW", "WTW", "WWW", 'X', Item.diamond, 'W',
-								wovenSilk, 'T', def.backpackT1.getStack() });
+						def.backpackT2.getStack(), new Object[] {"WXW", "WTW", "WWW", 'X', Items.diamond, 'W',
+								wovenSilk.getStack(), 'T', def.backpackT1.getStack() });
 			}
-	}
-
-	private int getId(BasicBackpack def, EnumBackpackType type) {
-		return getItemId(def.getKey() + (type == EnumBackpackType.T1 ? "T1" : "T2"));
 	}
 
 	private boolean getEnabled(String key) {

@@ -1,9 +1,9 @@
 package forestry.api.storage;
 
+import cpw.mods.fml.common.eventhandler.Cancelable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.event.Cancelable;
 
 /**
  * Use @ForgeSubscribe on a method taking this event as an argument. Will fire whenever a backpack tries to store an item. Processing will stop if the stacksize

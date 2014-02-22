@@ -1,8 +1,6 @@
 package redgear.morebackpacks.backpacks;
 
 import net.minecraft.item.ItemStack;
-import redgear.core.compat.ModConfigHelper;
-import redgear.core.compat.Mods;
 import redgear.morebackpacks.core.BasicBackpack;
 
 public class BackpackNuclear extends BasicBackpack {
@@ -12,7 +10,7 @@ public class BackpackNuclear extends BasicBackpack {
 
 	@Override
 	public void fill() {
-		addItem("reactorUraniumSimple");
+		/*addItem("reactorUraniumSimple");
 		addItem("reactorUraniumDual");
 		addItem("reactorUraniumQuad");
 		addItem("reactorCoolantSimple");
@@ -68,12 +66,12 @@ public class BackpackNuclear extends BasicBackpack {
 			addItem("item.60k_NaK_Coolantcell");
 			addItem("item.180k_NaK_Coolantcell");
 			addItem("item.360k_NaK_Coolantcell");
-		}
+		}*/
 	}
 
 	@Override
 	public boolean modsLoaded() {
-		return Mods.IC2.isIn();
+		return false; //Mods.IC2.isIn();
 	}
 
 	@Override
@@ -83,6 +81,6 @@ public class BackpackNuclear extends BasicBackpack {
 
 	@Override
 	public ItemStack getCraftingItem() {
-		return ModConfigHelper.get("reactorCoolantSimple");
+		return null; //ModConfigHelper.get("reactorCoolantSimple");
 	}
 }

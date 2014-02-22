@@ -2,19 +2,19 @@ package redgear.morebackpacks.core;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Set;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
-import redgear.core.compat.ModConfigHelper;
 import redgear.core.util.SimpleItem;
+import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import forestry.api.storage.IBackpackDefinition;
 
 public abstract class BasicBackpack implements IBackpackDefinition {
-	protected HashSet<SimpleItem> itemsList = new HashSet<SimpleItem>(20);
+	protected Set<SimpleItem> itemsList = new HashSet<SimpleItem>(20);
 	public SimpleItem backpackT1;
 	public SimpleItem backpackT2;
 	private final String unlocalname;
@@ -37,42 +37,45 @@ public abstract class BasicBackpack implements IBackpackDefinition {
 
 	public abstract ItemStack getCraftingItem();
 
-	@Override
-	public void addValidItem(ItemStack validItem) {
+	public void addItem(SimpleItem item) {
+		itemsList.add(item);
+	}
+
+	public void addItem(ItemStack validItem) {
 		if (validItem == null)
 			return;    //Item can't be null
 
-		addItem(validItem.itemID, validItem.getItemDamage());
+		addItem(new SimpleItem(validItem));
 	}
 
-	public void addItem(int id, int meta) {
-		if (id <= 0 || id >= Item.itemsList.length)
-			return;    //Id must be valid
-
-		if (Item.itemsList[id] == null)
-			return;    //Item must really exist
-
-		SimpleItem temp = new SimpleItem(id, meta);
-
-		if (itemsList.contains(temp))
-			return;    //No sense in holding the same item twice
-
-		itemsList.add(temp);
+	@Override
+	public void addValidItem(ItemStack validItem) {
+		addItem(validItem);
 	}
 
 	public void addItem(Item validItem) {
 		if (validItem != null)
-			addItem(validItem.itemID, OreDictionary.WILDCARD_VALUE);
+			addItem(new SimpleItem(validItem));
 	}
 
 	public void addItem(Block validItem) {
 		if (validItem != null)
-			addItem(validItem.blockID, OreDictionary.WILDCARD_VALUE);
+			addItem(new SimpleItem(validItem));
+	}
+
+	public void addItem(Item validItem, int meta) {
+		if (validItem != null)
+			addItem(new SimpleItem(validItem, meta));
+	}
+
+	public void addItem(Block validItem, int meta) {
+		if (validItem != null)
+			addItem(new SimpleItem(validItem, meta));
 	}
 
 	@Override
 	public Collection<ItemStack> getValidItems(EntityPlayer player) {
-		HashSet<ItemStack> stack = new HashSet<ItemStack>(itemsList.size() - 1);
+		Set<ItemStack> stack = new HashSet<ItemStack>(itemsList.size() - 1);
 
 		for (SimpleItem item : itemsList)
 			stack.add(item.getStack());
@@ -90,12 +93,12 @@ public abstract class BasicBackpack implements IBackpackDefinition {
 		return 16777215;
 	}
 
-	public void addItem(String itemName) {
-		addValidItem(ModConfigHelper.get(itemName));
+	public void addItem(String modName, String itemName) {
+		addItem(GameRegistry.findItem(modName, itemName));
 	}
 
-	public void addItem(String itemName, int meta) {
-		addValidItem(ModConfigHelper.get(itemName, meta));
+	public void addItem(String modName, String itemName, int meta) {
+		addItem(GameRegistry.findItem(modName, itemName), meta);
 	}
 
 	public void addItems(ItemStack[] items) {
@@ -103,29 +106,29 @@ public abstract class BasicBackpack implements IBackpackDefinition {
 			addValidItem(each);
 	}
 
-	public void addItems(String[] itemNames) {
+	public void addItems(String modName, String[] itemNames) {
 		for (String name : itemNames)
-			addItem(name);
+			addItem(modName, name);
 	}
 
-	public void addItemsFromMeta(int Id, int startMeta, int endMeta) {
+	public void addItemsFromMeta(Item item, int startMeta, int endMeta) {
 		for (int i = startMeta; i <= endMeta; i++)
-			addItem(Id, i);
+			addItem(item, i);
 	}
 
-	public void addItemsFromMeta(int Id, int endMeta) {
-		addItemsFromMeta(Id, 0, endMeta);
+	public void addItemsFromMeta(Item item, int endMeta) {
+		addItemsFromMeta(item, 0, endMeta);
 	}
 
-	public void addItemsFromMeta(String itemName, int startMeta, int endMeta) {
-		ItemStack test = ModConfigHelper.get(itemName);
+	public void addItemsFromMeta(String modName, String itemName, int startMeta, int endMeta) {
+		Item test = GameRegistry.findItem(modName, itemName);
 
 		if (test != null)
-			addItemsFromMeta(test.itemID, startMeta, endMeta);
+			addItemsFromMeta(test, startMeta, endMeta);
 	}
 
-	public void addItemsFromMeta(String itemName, int endMeta) {
-		addItemsFromMeta(itemName, 0, endMeta);
+	public void addItemsFromMeta(String modName, String itemName, int endMeta) {
+		addItemsFromMeta(modName, itemName, 0, endMeta);
 	}
 
 	@Override
