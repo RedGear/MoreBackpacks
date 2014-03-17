@@ -26,7 +26,7 @@ public class BackpackElectrician extends BasicBackpack {
 			addItem("blockGenerator");*/
 		}
 
-		if (Mods.BuildcraftCore.isIn()) {
+		if (Mods.BCCore.isIn()) {
 			/*addItem("tile.engineBlock");
 
 			if (Mods.BuildcraftCore.isIn()) {

@@ -58,7 +58,7 @@ public class BackpackLogistic extends BasicBackpack {
 			addItem(tile + "signal");*/
 		}
 
-		if (Mods.BuildcraftCore.isIn()) {
+		if (Mods.BCCore.isIn()) {
 			/*addItem("item.pipeFacade");
 			addItem("item.pipePlug");
 			addItem("item.PipeStructureCobblestone");

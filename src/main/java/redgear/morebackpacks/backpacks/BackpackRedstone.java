@@ -27,7 +27,7 @@ public class BackpackRedstone extends BasicBackpack {
 		addItem(Blocks.piston);
 		addItem(Blocks.sticky_piston);
 
-		if (Mods.BuildcraftCore.isIn()) {
+		if (Mods.BCCore.isIn()) {
 			/*addItem("item.pipeGate");
 
 			addItem("item.greenPipeWire");

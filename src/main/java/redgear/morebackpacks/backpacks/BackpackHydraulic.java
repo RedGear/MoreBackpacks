@@ -22,7 +22,7 @@ public class BackpackHydraulic extends BasicBackpack {
 			addValidItem(each.filledContainer);
 		}
 
-		if (Mods.BuildcraftCore.isIn()) {
+		if (Mods.BCCore.isIn()) {
 			/*String materials[] = {"Wood", "Emerald", "Stone", "Cobblestone", "Iron", "Gold", "Void", "Sandstone" };
 
 			for (String i : materials)
