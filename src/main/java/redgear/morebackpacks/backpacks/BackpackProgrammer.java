@@ -1,8 +1,7 @@
 package redgear.morebackpacks.backpacks;
 
 import net.minecraft.item.ItemStack;
-import redgear.core.compat.ModConfigHelper;
-import redgear.core.compat.Mods;
+import redgear.core.mod.Mods;
 import redgear.morebackpacks.core.BasicBackpack;
 
 public class BackpackProgrammer extends BasicBackpack {
@@ -38,19 +37,19 @@ public class BackpackProgrammer extends BasicBackpack {
 		 */
 
 		if (Mods.ComputerCraft.isIn()) {
-			addItem("tile.cccomputer"); // Computer
+			/*addItem("tile.cccomputer"); // Computer
 			addItem("tile.ccdiskdrive"); //Peripherals
 			addItem("tile.cccable");
 			addItem("item.ccdisk");
 			addItem("item.ccprintout"); // Printed pages
 			addItem("tile.ccturtle"); // Turtles
-			addItem("tile.ccturtle");
+			addItem("tile.ccturtle");*/
 		}
 	}
 
 	@Override
 	public boolean modsLoaded() {
-		return Mods.ComputerCraft.isIn();
+		return false; //Mods.ComputerCraft.isIn();
 	}
 
 	@Override
@@ -60,6 +59,6 @@ public class BackpackProgrammer extends BasicBackpack {
 
 	@Override
 	public ItemStack getCraftingItem() {
-		return ModConfigHelper.get("tile.cccable", 0);
+		return null; //ModConfigHelper.get("tile.cccable", 0);
 	}
 }

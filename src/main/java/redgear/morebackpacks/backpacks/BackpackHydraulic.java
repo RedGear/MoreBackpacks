@@ -1,10 +1,10 @@
 package redgear.morebackpacks.backpacks;
 
-import net.minecraft.item.Item;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidContainerRegistry.FluidContainerData;
-import redgear.core.compat.Mods;
+import redgear.core.mod.Mods;
 import redgear.morebackpacks.core.BasicBackpack;
 
 public class BackpackHydraulic extends BasicBackpack {
@@ -22,12 +22,12 @@ public class BackpackHydraulic extends BasicBackpack {
 			addValidItem(each.filledContainer);
 		}
 
-		if (Mods.BuildcraftCore.isIn()) {
-			String materials[] = {"Wood", "Emerald", "Stone", "Cobblestone", "Iron", "Gold", "Void", "Sandstone" };
+		if (Mods.BCCore.isIn()) {
+			/*String materials[] = {"Wood", "Emerald", "Stone", "Cobblestone", "Iron", "Gold", "Void", "Sandstone" };
 
 			for (String i : materials)
 				addItem("item.PipeFluids" + i);
-
+*/
 		}
 	}
 
@@ -38,6 +38,6 @@ public class BackpackHydraulic extends BasicBackpack {
 
 	@Override
 	public ItemStack getCraftingItem() {
-		return new ItemStack(Item.bucketEmpty);
+		return new ItemStack(Items.bucket);
 	}
 }

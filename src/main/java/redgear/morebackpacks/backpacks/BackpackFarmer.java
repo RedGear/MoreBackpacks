@@ -1,9 +1,9 @@
 package redgear.morebackpacks.backpacks;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import redgear.core.compat.Mods;
+import redgear.core.mod.Mods;
 import redgear.morebackpacks.core.BasicBackpack;
 
 public class BackpackFarmer extends BasicBackpack {
@@ -14,31 +14,33 @@ public class BackpackFarmer extends BasicBackpack {
 
 	@Override
 	public void fill() {
-		addItem(Item.seeds);
-		addItem(Item.wheat);
-		addItem(Item.carrot);
-		addItem(Item.potato);
-		addItem(Item.poisonousPotato);
-		addItem(Item.reed);
-		addItem(Item.netherStalkSeeds);
-		addItem(Item.melon);
-		addItem(Item.melonSeeds);
-		addItem(Item.pumpkinSeeds);
-		addItem(Block.cactus);
-		addItem(Block.pumpkin);
-		addItem(Block.mushroomBrown);
-		addItem(Block.mushroomRed);
-		addItem(Block.cocoaPlant);
+		addItem(Items.wheat_seeds);
+		addItem(Items.wheat);
+		addItem(Items.carrot);
+		addItem(Items.potato);
+		addItem(Items.poisonous_potato);
+		addItem(Items.reeds);
+		addItem(Items.nether_wart);
+		addItem(Items.melon);
+		addItem(Items.melon_seeds);
+		addItem(Items.pumpkin_seeds);
+		addItem(Blocks.cactus);
+		addItem(Blocks.pumpkin);
+		addItem(Blocks.brown_mushroom_block);
+		addItem(Blocks.red_mushroom_block);
+		addItem(Blocks.cocoa);
 
 		if (Mods.IC2.isIn()) {
-			addItem("itemCropSeed");
-			addItem("itemCropnalyzer");
-			addItem("itemFertilizer");
-			addItem("itemCellHydrant");
-			addItem("itemWeedEx");
-			addItem("itemTerraWart");
-			addItem("itemCofeeBeans");
-			addItem("itemHops");
+			/*
+			 * addItem("itemCropSeed");
+			 * addItem("itemCropnalyzer");
+			 * addItem("itemFertilizer");
+			 * addItem("itemCellHydrant");
+			 * addItem("itemWeedEx");
+			 * addItem("itemTerraWart");
+			 * addItem("itemCofeeBeans");
+			 * addItem("itemHops");
+			 */
 		}
 	}
 
@@ -49,6 +51,6 @@ public class BackpackFarmer extends BasicBackpack {
 
 	@Override
 	public ItemStack getCraftingItem() {
-		return new ItemStack(Item.seeds);
+		return new ItemStack(Items.wheat_seeds);
 	}
 }

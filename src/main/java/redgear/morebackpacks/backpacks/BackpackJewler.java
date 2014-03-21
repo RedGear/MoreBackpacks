@@ -2,7 +2,7 @@ package redgear.morebackpacks.backpacks;
 
 import java.util.ArrayList;
 
-import net.minecraft.item.Item;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 import redgear.morebackpacks.core.BasicBackpack;
@@ -30,6 +30,6 @@ public class BackpackJewler extends BasicBackpack {
 
 	@Override
 	public ItemStack getCraftingItem() {
-		return new ItemStack(Item.emerald);
+		return new ItemStack(Items.emerald);
 	}
 }
