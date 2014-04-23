@@ -1,20 +1,20 @@
 package redgear.morebackpacks.core;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.LinkedList;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
+import net.minecraftforge.oredict.OreDictionary;
 import redgear.core.util.SimpleItem;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 import forestry.api.storage.IBackpackDefinition;
 
 public abstract class BasicBackpack implements IBackpackDefinition {
-	protected Set<SimpleItem> itemsList = new HashSet<SimpleItem>(20);
+	public Collection<SimpleItem> itemsList = new LinkedList<SimpleItem>();
 	public SimpleItem backpackT1;
 	public SimpleItem backpackT2;
 	private final String unlocalname;
@@ -38,13 +38,11 @@ public abstract class BasicBackpack implements IBackpackDefinition {
 	public abstract ItemStack getCraftingItem();
 
 	public void addItem(SimpleItem item) {
-		itemsList.add(item);
+		if(!itemsList.contains(item))
+			itemsList.add(item);
 	}
 
 	public void addItem(ItemStack validItem) {
-		if (validItem == null)
-			return;    //Item can't be null
-
 		addItem(new SimpleItem(validItem));
 	}
 
@@ -55,12 +53,12 @@ public abstract class BasicBackpack implements IBackpackDefinition {
 
 	public void addItem(Item validItem) {
 		if (validItem != null)
-			addItem(new SimpleItem(validItem));
+			addItem(new SimpleItem(validItem, OreDictionary.WILDCARD_VALUE));
 	}
 
 	public void addItem(Block validItem) {
 		if (validItem != null)
-			addItem(new SimpleItem(validItem));
+			addItem(new SimpleItem(validItem, OreDictionary.WILDCARD_VALUE));
 	}
 
 	public void addItem(Item validItem, int meta) {
@@ -74,8 +72,8 @@ public abstract class BasicBackpack implements IBackpackDefinition {
 	}
 
 	@Override
-	public Collection<ItemStack> getValidItems(EntityPlayer player) {
-		Set<ItemStack> stack = new HashSet<ItemStack>(itemsList.size() - 1);
+	public final Collection<ItemStack> getValidItems(EntityPlayer player) {
+		Collection<ItemStack> stack = new ArrayList<ItemStack>(itemsList.size());
 
 		for (SimpleItem item : itemsList)
 			stack.add(item.getStack());
@@ -93,24 +91,6 @@ public abstract class BasicBackpack implements IBackpackDefinition {
 		return 16777215;
 	}
 
-	public void addItem(String modName, String itemName) {
-		addItem(GameRegistry.findItem(modName, itemName));
-	}
-
-	public void addItem(String modName, String itemName, int meta) {
-		addItem(GameRegistry.findItem(modName, itemName), meta);
-	}
-
-	public void addItems(ItemStack[] items) {
-		for (ItemStack each : items)
-			addValidItem(each);
-	}
-
-	public void addItems(String modName, String[] itemNames) {
-		for (String name : itemNames)
-			addItem(modName, name);
-	}
-
 	public void addItemsFromMeta(Item item, int startMeta, int endMeta) {
 		for (int i = startMeta; i <= endMeta; i++)
 			addItem(item, i);
@@ -120,17 +100,6 @@ public abstract class BasicBackpack implements IBackpackDefinition {
 		addItemsFromMeta(item, 0, endMeta);
 	}
 
-	public void addItemsFromMeta(String modName, String itemName, int startMeta, int endMeta) {
-		Item test = GameRegistry.findItem(modName, itemName);
-
-		if (test != null)
-			addItemsFromMeta(test, startMeta, endMeta);
-	}
-
-	public void addItemsFromMeta(String modName, String itemName, int endMeta) {
-		addItemsFromMeta(modName, itemName, 0, endMeta);
-	}
-
 	@Override
 	public final String getKey() {
 		return unlocalname.toLowerCase();
@@ -138,8 +107,7 @@ public abstract class BasicBackpack implements IBackpackDefinition {
 
 	@Override
 	public final String getName() {
-		return LanguageRegistry.instance().getStringLocalization(
-				"item.RedGear.MoreBackpacks.Backpack." + unlocalname + ".name");
+		return StatCollector.translateToLocal("item.RedGear.MoreBackpacks.Backpack." + unlocalname + ".name");
 	}
 
 }

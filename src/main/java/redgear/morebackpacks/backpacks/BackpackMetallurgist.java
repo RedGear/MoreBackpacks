@@ -1,6 +1,6 @@
 package redgear.morebackpacks.backpacks;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -29,7 +29,7 @@ public class BackpackMetallurgist extends BasicBackpack {
 				"Prometheum", "Hepatizon", "Kalendrite", "Orichalcum", "Adamantine", "Infuscolium", "RefinedIron",
 				"Black Steel", "Vulcanite", "Tungsten", "Magnesium", "Midasium", "Oureclase", "Carmot", "Shadow Steel",
 				"Ardite", "Cobalt", "Osmium", "Alumite", "AluminumBrass", "NaturalAluminum", "Manyullyn", "Alduorite" };
-		ArrayList<ItemStack> stacks;
+		List<ItemStack> stacks;
 		String prefixs[] = {"nugget", "ingot", "block", "plate", "dust", "dustSmall" };
 
 		for (String metal : metals)

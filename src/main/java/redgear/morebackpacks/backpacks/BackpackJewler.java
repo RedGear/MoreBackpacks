@@ -1,6 +1,6 @@
 package redgear.morebackpacks.backpacks;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -18,8 +18,9 @@ public class BackpackJewler extends BasicBackpack {
 
 		for (String ore : ores)
 			if (ore != null && ore.startsWith("gem")) {
-				ArrayList<ItemStack> temp = OreDictionary.getOres(ore);
-				addItems(temp.toArray(new ItemStack[temp.size()]));
+				List<ItemStack> list = OreDictionary.getOres(ore);
+				for(ItemStack stack : list)
+					addItem(stack);
 			}
 	}
 
