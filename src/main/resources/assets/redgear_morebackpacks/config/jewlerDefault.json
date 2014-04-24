@@ -1,15 +1,5 @@
 {
   "backpackKey": "jewler",
   "items": [
-    "BiomesOPlenty:gems@4",
-    "BiomesOPlenty:gems@5",
-    "Forestry:apatite@0",
-    "BiomesOPlenty:gems@6",
-    "minecraft:diamond@0",
-    "BiomesOPlenty:gems@2",
-    "Thaumcraft:ItemResource@6",
-    "minecraft:emerald@0",
-    "BiomesOPlenty:gems@1",
-    "BiomesOPlenty:gems@3"
-  ]
+   "minecraft:diamond"]
 }
