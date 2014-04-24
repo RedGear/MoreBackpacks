@@ -1,6 +1,9 @@
 package redgear.morebackpacks.core;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +11,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidRegistry;
+import redgear.core.mod.FileHelper;
 import redgear.core.mod.ModUtils;
 import redgear.core.util.SimpleItem;
 import redgear.core.util.StringHelper;
@@ -23,7 +27,6 @@ import redgear.morebackpacks.backpacks.BackpackNuclear;
 import redgear.morebackpacks.backpacks.BackpackProgrammer;
 import redgear.morebackpacks.backpacks.BackpackRedstone;
 import redgear.morebackpacks.backpacks.BackpackSurvival;
-import redgear.morebackpacks.config.BackpackDataBuilder;
 import redgear.morebackpacks.config.ConfigReader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -84,6 +87,8 @@ public class MoreBackpacks extends ModUtils {
 
 		for (BasicBackpack def : backpacks)
 			fillBackpack(def);
+		
+		ConfigReader.readAll(scriptDir);
 	}
 
 	/**
@@ -123,8 +128,21 @@ public class MoreBackpacks extends ModUtils {
 			}
 
 		File config = new File(scriptDir, def.getKey() + "Default.json");
-		BackpackDataBuilder builder = new BackpackDataBuilder(def);
-		ConfigReader.write(config, builder.build());
+		
+		if(!config.exists()){
+			try {
+				FileHelper.copy(MoreBackpacks.class.getResourceAsStream("/assets/redgear_morebackpacks/config/" + def.getKey() + "Default.json"), new FileOutputStream(config));
+			} catch (FileNotFoundException e) {
+				this.myLogger.error(StringHelper.concat("Uh oh! Config for backpack", def.getKey(), " not found, but default config was missing too! I don't know what to do :'("), e);
+			} catch (IOException e) {
+				this.myLogger.error(StringHelper.concat("Uh oh! Config for backpack", def.getKey(), " not found, but there was a problem copying the default config from inside the mod's .jar. Maybe restarting will fix it?"), e);
+			}
+			
+			
+		}
+		
+		//BackpackDataBuilder builder = new BackpackDataBuilder(def);
+		//ConfigReader.write(config, builder.build());
 	}
 
 	@Override

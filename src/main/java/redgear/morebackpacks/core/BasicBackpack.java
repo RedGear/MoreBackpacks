@@ -23,7 +23,9 @@ public abstract class BasicBackpack implements IBackpackDefinition {
 		this.unlocalname = unlocalname;
 	}
 
-	public abstract void fill();
+	public void fill(){
+		
+	}
 
 	/**
 	 * Returns true if all mods needed for this backpack are installed.

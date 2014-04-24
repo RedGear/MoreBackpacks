@@ -1,0 +1,23 @@
+{
+  "backpackKey": "survival",
+  "items": [
+    "minecraft:porkchop",
+    "minecraft:beef",
+    "minecraft:chicken",
+    "minecraft:baked_potato",
+    "minecraft:carrot",
+    "minecraft:cake",
+    "minecraft:bread",
+    "minecraft:apple",
+    "minecraft:golden_apple",
+    "minecraft:mushroom_stew",
+    "minecraft:bowl",
+    "minecraft:fish",
+    "minecraft:golden_carrot",
+    "minecraft:melon",
+    "minecraft:pumpkin_pie",
+    "minecraft:rotten_flesh",
+    "minecraft:speckled_melon",
+    "minecraft:cookie"
+  ]
+}

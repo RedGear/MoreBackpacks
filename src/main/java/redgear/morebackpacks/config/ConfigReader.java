@@ -3,6 +3,9 @@ package redgear.morebackpacks.config;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.Writer;
+import java.util.Arrays;
+import java.util.Stack;
 
 import redgear.morebackpacks.core.MoreBackpacks;
 
@@ -13,10 +16,10 @@ import forestry.api.storage.BackpackManager;
 import forestry.api.storage.IBackpackDefinition;
 
 public class ConfigReader {
-	
+
 	private static Gson gson;
-	
-	static{
+
+	static {
 		gson = new GsonBuilder().setPrettyPrinting().serializeNulls().create();
 	}
 
@@ -25,7 +28,7 @@ public class ConfigReader {
 	}
 
 	public static void read(File file) {
-		
+
 		try {
 			BackpackData data = gson.fromJson(new FileReader(file), BackpackData.class);
 
@@ -42,19 +45,41 @@ public class ConfigReader {
 		}
 
 	}
-	
-	public static void write(String file, BackpackData data){
+
+	public static void write(String file, BackpackData data) {
 		write(new File(file), data);
 	}
-	
-	public static void write(File file, BackpackData data){
+
+	public static void write(File file, BackpackData data) {
 		try {
-			if(!file.exists())
-				gson.toJson(data, new FileWriter(file));
-			else
+			if (!file.exists()) {
+				Writer writer = new FileWriter(file);
+				gson.toJson(data, writer);
+				writer.close();
+			} else
 				MoreBackpacks.inst.logDebug("File: ", file, " already exists.");
 		} catch (Exception e) {
 			MoreBackpacks.inst.logDebug("ConfigReader couldn't write file: " + file, e);
+		}
+	}
+
+	public static void readAll(File directory) {
+		Stack<File> files = new Stack<File>();
+		files.add(directory);
+
+		File next;
+
+		while (!files.empty()) {
+			next = files.pop();
+
+			if (next == null)
+				continue;
+
+			if (next.isDirectory())
+				files.addAll(Arrays.asList(next.listFiles()));
+			else if (next.getName().endsWith(".json"))
+				read(next);
+
 		}
 	}
 }
