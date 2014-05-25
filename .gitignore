@@ -2,6 +2,8 @@
 .settings
 bin
 build
+dep
+run
 eclipse
 
 #################

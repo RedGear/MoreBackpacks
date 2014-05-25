@@ -1,0 +1,17 @@
+[
+{
+  "modid": "redgear_morebackpacks",
+  "name": "More Backpacks",
+  "description": "Extra Storage!",
+  "version": "${version}",
+  "credits": "Created by Team Red Gear",
+  "logoFile": "",
+  "mcversion": "${minecraft_version}",
+  "url": "http://curse.com/project/59821",
+  "updateUrl": "",
+  "authors": [ "LordBlackHole"],
+  "parent":"",
+  "screenshots": [],
+  "dependencies": ["redgear_core", "Forestry"]
+}
+]
