@@ -1,8 +1,8 @@
 package redgear.morebackpacks.core;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -74,13 +74,9 @@ public abstract class BasicBackpack implements IBackpackDefinition {
 	}
 
 	@Override
-	public final Collection<ItemStack> getValidItems(EntityPlayer player) {
-		Collection<ItemStack> stack = new ArrayList<ItemStack>(itemsList.size());
-
+	public void addValidItems(List<ItemStack> validItems) {
 		for (SimpleItem item : itemsList)
-			stack.add(item.getStack());
-
-		return stack;
+			validItems.add(item.getStack());
 	}
 
 	@Override
@@ -108,8 +104,13 @@ public abstract class BasicBackpack implements IBackpackDefinition {
 	}
 
 	@Override
-	public final String getName() {
+	public String getName() {
 		return StatCollector.translateToLocal("item.RedGear.MoreBackpacks.Backpack." + unlocalname + ".name");
+	}
+	
+	@Override
+	public String getName(ItemStack backpack) {
+		return getName();
 	}
 
 }
