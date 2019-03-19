@@ -80,7 +80,7 @@ public abstract class BasicBackpack implements IBackpackDefinition {
 	}
 
 	@Override
-	public boolean isValidItem(EntityPlayer player, ItemStack check) {
+	public boolean isValidItem(ItemStack check) {
 		return itemsList.contains(new SimpleItem(check));
 	}
 
@@ -103,7 +103,6 @@ public abstract class BasicBackpack implements IBackpackDefinition {
 		return unlocalname.toLowerCase();
 	}
 
-	@Override
 	public String getName() {
 		return StatCollector.translateToLocal("item.RedGear.MoreBackpacks.Backpack." + unlocalname + ".name");
 	}
